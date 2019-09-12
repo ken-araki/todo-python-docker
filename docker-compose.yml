@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  db:
+    build: ./mysql
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: todo
+      MYSQL_USER: worker
+      MYSQL_PASSWORD: worker
+      TZ: 'Asia/Tokyo'
+
+  python:
+    build: ./python3
+    volumes:
+      - ./python3:/work
+    expose:
+      - "3031"
+    depends_on:
+      - db
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "8000:8000"
+    links:
+      - python
+    depends_on:
+      - python

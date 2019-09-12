@@ -1,0 +1,40 @@
+{% load bootstrap4 %}
+<html>
+    <head>
+        {% bootstrap_css %}
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-light">
+            <form class="form-inline">
+                <a href="{% url 'todo:edit' '0' %}">
+                    <button class="btn btn-outline-dark" type="button">TODO追加</button>
+                </a>
+            </form>
+        </nav>
+
+        <div class="container">
+            <table class="table mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">たいとる</th>
+                        <th scope="col">こうしんび</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in list %}
+                    <tr>
+                        <th scope="row">
+                            <a href="{% url 'todo:edit' t.todo_id %}" >
+                                {{ t.todo_id }}
+                            </a>
+                        </th>
+                        <td>{{ t.title }}</td>
+                        <td>{{ t.update_date|date:"Y/m/d" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
