@@ -1,4 +1,4 @@
-Django==2.2.8
+Django==2.2.18
 uwsgi==2.0.18
 django-bootstrap4==1.0.1
 mysqlclient==1.4.4
